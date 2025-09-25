@@ -1,4 +1,3 @@
----
 # MDX Scripting Language Documentation
 
 **Purpose:**
@@ -11,13 +10,11 @@ MDX is a lightweight Markdown-based scripting language designed for writing note
 ### 1.1 Metadata (Front Matter)
 At the top of an MDX file, you can define global metadata using YAML front matter:
 
-```mdx
----
+```yaml
 version: 0.1
 author: Alice
-model: gpt-3.5
+model: dolphin3
 temperature: 0.7
----
 ```
 
 - **version**: File version.
@@ -65,12 +62,7 @@ LLM functions are prefixed with `/`:
 ```
 
 - `/explain`, `/summarise`, `/factcheck` are example LLM functions.
-- Inline flags (`@model`, `@temperature`, `@replace`, `@async`, `@window`) modify execution per call.
-
-### 3.2 Execution Flags
-- `@async`: Run function asynchronously.
-- `@replace`: Replace previous response block.
-- `@window`: Place response in a new response block.
+- Inline flags (`@model`, `@temperature`) modify execution per call.
 
 ---
 
@@ -94,12 +86,9 @@ LLM functions are prefixed with `/`:
 Example marker:
 
 ```mdx
-```llm:response
+# Response
 Scripting languages are flexible because they are interpreted, dynamic, and easy to extend.
 ```
-```
-
-- The interpreter inserts these blocks automatically.
 
 ---
 
@@ -107,33 +96,22 @@ Scripting languages are flexible because they are interpreted, dynamic, and easy
 
 ```mdx
 ---
-version: 0.2
-author: Alice
-model: gpt-3.5
+version: 1
+author: moviemakerhd
+model: dolphin3
 temperature: 0.7
 ---
 
-@set model = gpt-4
-@set name = "Henry"
+@set model = gpt-oss:20b
+@set name = "Name"
 @set topic = "scripting languages"
 
-# Notes on {@topic}
+/explain "Why are {@topic} flexible?"
 
-/explain "Why are {@topic} flexible?" @async
-
-/summarise "Condense the above notes" @replace
+/summarise "Condense the above notes"
 ```
 
 - LLM output blocks are inserted automatically after each function execution.
 - User variables `{@name}` and `{@topic}` are substituted inline.
 - System variables control LLM behavior.
-
----
-
-## 7. Summary
-
-- MDX combines **Markdown** with **LLM scripting**.
-- Supports **metadata**, **user variables**, **system variables**, and **inline LLM calls**.
-- Execution flags control **async**, **replacement**, and **windowing** behavior.
-- No loops or conditionals — logic is limited to variables and LLM-driven enhancements.
 

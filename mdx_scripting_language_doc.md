@@ -102,16 +102,20 @@ model: dolphin3
 temperature: 0.7
 ---
 
-@set model = gpt-oss:20b
-@set name = "Name"
-@set topic = "scripting languages"
+@model: gpt-4o
+@length: short
+@format: json
 
-/explain "Why are {@topic} flexible?"
+Lecture notes on machine learning:
 
-/summarise "Condense the above notes"
+- Supervised learning uses labeled data.
+- Unsupervised learning finds hidden structure.
+- Reinforcement learning is trial and error.
+
+/summarize [line:5-line:7] {Give a 2–3 sentence summary of these learning types}
+
+/fact_check [line:5] {Verify if supervised learning *always* needs labeled data}
+
+/custom [line:6] {Generate a simple analogy for unsupervised learning}
 ```
-
-- LLM output blocks are inserted automatically after each function execution.
-- User variables `{@name}` and `{@topic}` are substituted inline.
-- System variables control LLM behavior.
 
